@@ -1,1 +1,1 @@
-# SpellChecker-and-Grammer-checker---Sinhala
+# SpellChecker-and-GrammerChecker-Sinhala
