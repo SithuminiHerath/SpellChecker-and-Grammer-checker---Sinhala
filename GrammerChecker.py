@@ -1,4 +1,15 @@
-def correct_sentence_with_rules(sentence):
+import json
+
+def load_corrections(corrections_file):
+    """
+    Load correction rules from a JSON file.
+    """
+    with open(corrections_file, 'r', encoding='utf-8') as file:
+        corrections_data = json.load(file)
+    return corrections_data
+
+
+def correct_sentence_with_rules(sentence, corrections_data):
     """
     Corrects Sinhala grammar errors in a given sentence based on subject-specific rules.
     """
@@ -11,37 +22,14 @@ def correct_sentence_with_rules(sentence):
     # Identify the subject (first word)
     subject = words[0]
 
-    # Define corrections based on the subject
-    if subject == "මම":
-        corrections = {
-            "ගියෙමු": "ගියෙමි",
-            "කලෙමු": "කලෙමි",
-            "යමු": "යමි",
-        }
-    elif subject == "අපි":
-        corrections = {
-            "ගියෙමි": "ගියෙමු",
-            "සෙල්ලම් කලෝය": "සෙල්ලම් කලෙමු",
-        }
-    elif subject in ["අක්කා", "අම්මා"]:
-        corrections = {
-            "ගියෙමි": "ගියාය",
-            "ගියහ": "ගියාය",
-            "කීවේය": "කීවාය",
-        }
-    elif subject in ["අයියා", "මල්ලී"]:
-        corrections = {
-            "ගියාය": "ගියේය",
-            "ගියෙමි": "ගියේය",
-            "ගියෙමු": "ගියේය",
-            "කලාය": "කලේය",
-            "කලෙමි": "කලේය",
-            "කීවාය": "කීවේය",
-        }
-    else:
-        corrections = {}  # Default, no corrections
+    # Find the relevant correction rules for the subject
+    corrections = {}
+    for key, rules in corrections_data.items():
+        if subject in key.split(","):  # Check if the subject matches any key
+            corrections = rules
+            break
 
-    # Check for the correction in the sentence
+    # Apply corrections if applicable
     corrected_sentence = sentence
     for incorrect, correct in corrections.items():
         if incorrect in sentence:
@@ -53,15 +41,19 @@ def correct_sentence_with_rules(sentence):
 
 # Example Sentences
 sentences = [
-    "මම කඩේ ගියෙමි ",       # Correct
-    "අපි සෙල්ලම් කලෝය",     # Incorrect
-    "අක්කා සිංදු කීවේය",    # Incorrect
-    "අයියා පාසල් ගියෙමි",   # Incorrect
-    "අම්මා උදෑසනම රැකියාවට ගියහ",  # Incorrect
+    "මම කඩේ ගියෙමු",
+    "අපි සෙල්ලම් කලෝය",
+    "අක්කා සිංදු කීවේය",
+    "අයියා පාසල් ගියෙමි",
+    "අම්මා උදෑසනම රැකියාවට ගියහ"
 ]
 
-# Applying corrections
+# Load correction rules from a JSON file
+corrections_file = "corrections.json"  # Path to the JSON file with rules
+corrections_data = load_corrections(corrections_file)
+
+# Process sentences
 for sentence in sentences:
-    corrected = correct_sentence_with_rules(sentence)
-    print(f"Given Sentence: {sentence}")
-    print(f"Correct: {corrected}\n")
+    corrected = correct_sentence_with_rules(sentence, corrections_data)
+    print(f"Original: {sentence}")
+    print(f"Corrected: {corrected}\n")
