@@ -1,6 +1,0 @@
-streamlit
-nltk
-spellchecker
-scipy
-numpy
-pandas
