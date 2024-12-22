@@ -75,7 +75,7 @@ class SinhalaSpellChecker:
         return ' '.join(corrected_words)
 
 # Path to your Sinhala dictionary file
-dictionary_path = r"D:\7th Sem\SpellChecker & Grammer Checker\SpellChecker-and-Grammer-checker---Sinhala\data\sinhala_dictionary.txt"
+dictionary_path = r"sinhala_dictionary.txt"
 
 # Create an instance of the spell checker
 spell_checker = SinhalaSpellChecker(dictionary_path)
