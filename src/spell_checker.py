@@ -89,7 +89,7 @@ suggestions = spell_checker.suggest_corrections(misspelled_word)
 print(f"Suggestions for '{misspelled_word}':", suggestions)
 
 # Test 3: Correct an entire sentence
-sentence = "අදුරේ පිලිතුරු එලියට"
+sentence = "ආච්චි අසනප විය"
 corrected_sentence = spell_checker.correct_text(sentence)
 print("Corrected sentence:", corrected_sentence)
 
