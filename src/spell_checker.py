@@ -84,20 +84,59 @@ spell_checker = SinhalaSpellChecker(dictionary_path)
 print("Loaded dictionary words: ", list(spell_checker.dictionary)[:10])  # Print first 10 words
 
 # Test 2: Test spell correction for a single misspelled word
-misspelled_word = "මෙලව"  # Example misspelled word
+misspelled_word = "පසල"  # Example misspelled word
+suggestions = spell_checker.suggest_corrections(misspelled_word)
+print(f"Suggestions for '{misspelled_word}':", suggestions)
+
+misspelled_word = "අක්ක"  # Example misspelled word
+suggestions = spell_checker.suggest_corrections(misspelled_word)
+print(f"Suggestions for '{misspelled_word}':", suggestions)
+
+misspelled_word = "සෙලලම්"  # Example misspelled word
+suggestions = spell_checker.suggest_corrections(misspelled_word)
+print(f"Suggestions for '{misspelled_word}':", suggestions)
+
+misspelled_word = "කීවය"  # Example misspelled word
+suggestions = spell_checker.suggest_corrections(misspelled_word)
+print(f"Suggestions for '{misspelled_word}':", suggestions)
+
+misspelled_word = "අමමා"  # Example misspelled word
+suggestions = spell_checker.suggest_corrections(misspelled_word)
+print(f"Suggestions for '{misspelled_word}':", suggestions)
+
+misspelled_word = "ගියෙම"  # Example misspelled word
 suggestions = spell_checker.suggest_corrections(misspelled_word)
 print(f"Suggestions for '{misspelled_word}':", suggestions)
 
 # Test 3: Correct an entire sentence
-sentence = "ආච්චි අසනප විය"
+sentence = "අක්ක පාසල් ගියේය."
 corrected_sentence = spell_checker.correct_text(sentence)
+print("Original sentence",sentence)
 print("Corrected sentence:", corrected_sentence)
 
-# Test 4: Check with a sentence with no misspellings
-correct_sentence = "ආයුබෝවන්"
-corrected_correct_sentence = spell_checker.correct_text(correct_sentence)
-print("Correct sentence (no corrections):", corrected_correct_sentence)
+# Test 4: Correct an entire sentence
+sentence = "අපි සෙලලම් කලෙමු."
+corrected_sentence = spell_checker.correct_text(sentence)
+print("Original sentence",sentence)
+print("Corrected sentence:", corrected_sentence)
 
+# Test 5: Correct an entire sentence
+sentence = "අයයා සිංදු කීවාය."
+corrected_sentence = spell_checker.correct_text(sentence)
+print("Original sentence",sentence)
+print("Corrected sentence:", corrected_sentence)
+
+# Test 6: Correct an entire sentence
+sentence = "අමමා උදෑසනම රැකියාවට ගියාය."
+corrected_sentence = spell_checker.correct_text(sentence)
+print("Original sentence",sentence)
+print("Corrected sentence:", corrected_sentence)
+
+# Test 7: Correct an entire sentence
+sentence = "මම කඩේ ගියෙම."
+corrected_sentence = spell_checker.correct_text(sentence)
+print("Original sentence",sentence)
+print("Corrected sentence:", corrected_sentence)
 # Test 5: Test edge case: Empty string
 empty_text = ""
 corrected_empty_text = spell_checker.correct_text(empty_text)
